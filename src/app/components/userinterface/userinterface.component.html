@@ -1,0 +1,47 @@
+<div class="jumbotron text-center">
+    <h3>Light Bulb Problem</h3>
+  <!-- <hr> -->
+  <div class="col">
+    <div id="container">
+      <div id="row">
+        <form [formGroup]="messageForm" class="col-md-8" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+          <label>
+            Please Enter Number Of People:
+          </label>
+          <input type="text" formControlName="numOfPeople" class="form-control">
+          <div *ngIf="calculated && messageForm.controls.numOfPeople.errors" class="error">
+              <div *ngIf="messageForm.controls.numOfPeople.errors.required">Number Of People Is Required*</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+          <label>
+            Please Enter Number Of Bulbs:
+          </label>
+          <input type="text" formControlName="numOfBulbs" class="form-control">
+          <div *ngIf="calculated && messageForm.controls.numOfBulbs.errors" class="error">
+              <div *ngIf="messageForm.controls.numOfBulbs.errors.required">Number Of Bulbs Is Required*</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-danger">Calculate</button>
+        </form>
+        <br />
+        <br />
+        <div *ngIf="bulbNumbers && calculated">
+          <h5>Given {{ messageForm.controls.numOfPeople.value }} person(s) and {{ messageForm.controls.numOfBulbs.value }} light bulb(s)</h5>
+          <h5>You have {{ bulbNumbers.NumberOfBulbsOn }} light bulb(s) on </h5>
+          <h5>The Light Bulbs Remaining On Are: </h5>
+            <span *ngFor="let bulbNumber of bulbNumbers.BulbNumbers">
+              {{ bulbNumber }}
+            </span>
+          </div>
+      </div>
+      </div>
+
+     
+
+
+    </div>
+</div>
