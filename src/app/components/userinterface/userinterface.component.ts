@@ -10,6 +10,7 @@ import { CalculateService } from 'src/app/calculate.service';
 export class UserinterfaceComponent implements OnInit {
   messageForm: FormGroup;
   calculated = false;
+  replay = false;
   bulbNumbers: Object;
 
   constructor(private calculateService: CalculateService, private formBuilder: FormBuilder) 
@@ -44,12 +45,18 @@ export class UserinterfaceComponent implements OnInit {
         {
           this.bulbNumbers = response;
           console.log(this.bulbNumbers);
-          // this.calculated = false;
-          this.messageForm.reset();          
+          this.messageForm.disable();   
+          this.replay = true;      
           
         }
       )
       
     }    
+  }
+
+  onCalculateAgain(){
+    this.messageForm.enable();
+    this.calculated = false; 
+    this.replay = false;   
   }
 }

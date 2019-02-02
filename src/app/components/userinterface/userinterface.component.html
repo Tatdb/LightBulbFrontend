@@ -25,7 +25,8 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-danger">Calculate</button>
+          <button type="submit" class="btn btn-success">Calculate</button>&nbsp;&nbsp;
+          <button *ngIf="replay" type="button" class="btn btn-danger" (click)="onCalculateAgain()">Try Again</button>
         </form>
         <br />
         <br />
@@ -39,9 +40,6 @@
           </div>
       </div>
       </div>
-
-     
-
 
     </div>
 </div>
