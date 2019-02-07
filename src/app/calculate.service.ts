@@ -18,7 +18,7 @@ export class CalculateService {
   constructor(private http: HttpClient) { }
  
   calculateBulbs(numOfPeople:any, numOfBulbs:any) {
-    const url = "http://localhost:52749/api/bulbs";
+    const url = "https://localhost:44383/api/lightbulb";
     return this.http.get(url + "/" + numOfPeople + "/" + numOfBulbs)
   }
 

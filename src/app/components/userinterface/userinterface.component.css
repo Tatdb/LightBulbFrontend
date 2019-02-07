@@ -1,0 +1,24 @@
+.jumbotron-custom2 {
+    background-size: cover;  
+    background-color: white;  
+    margin: auto;
+    padding: 0 15px;
+    width: 70%;
+}
+
+.jumbotron-custom {
+    background-color: white;  
+    width: 80%;
+    margin: auto;
+    /* height: 400px; */
+    padding: 0 15px;
+}
+
+.jumbotron {   
+    background-color:black;     
+    height: 100px;
+}
+
+.error {    
+    color: red;
+}

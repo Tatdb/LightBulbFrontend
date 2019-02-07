@@ -10,14 +10,15 @@ import { CalculateService } from 'src/app/calculate.service';
 export class UserinterfaceComponent implements OnInit {
   messageForm: FormGroup;
   calculated = false;
+  success = false;
   replay = false;
-  bulbNumbers: Object;
+  numbers: Object;
 
   constructor(private calculateService: CalculateService, private formBuilder: FormBuilder) 
   {
     this.messageForm = this.formBuilder.group({
-      numOfPeople: ['', Validators.required],
-      numOfBulbs: ['', Validators.required]
+      numOfPeople: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      numOfBulbs: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
     })
   }
 
@@ -26,13 +27,12 @@ export class UserinterfaceComponent implements OnInit {
 
   onSubmit() {
     this.calculated = true;
-    if (this.messageForm.invalid){
+    if (this.messageForm.invalid){ 
       return;
     }
 
     if (this.messageForm.valid){
       
-      //let form = JSON.stringify(this.messageForm.value);
       let people = this.messageForm.controls.numOfPeople.value;
       console.log(people);
       let bulbs = this.messageForm.controls.numOfBulbs.value;
@@ -43,10 +43,12 @@ export class UserinterfaceComponent implements OnInit {
       (
         response=>
         {
-          this.bulbNumbers = response;
-          console.log(this.bulbNumbers);
+          this.numbers = response;
+          console.log(this.numbers);
           this.messageForm.disable();   
-          this.replay = true;      
+          this.replay = true;
+          this.success = true;
+          this.calculated = true;      
           
         }
       )
@@ -56,7 +58,9 @@ export class UserinterfaceComponent implements OnInit {
 
   onCalculateAgain(){
     this.messageForm.enable();
+    this.messageForm.reset();
     this.calculated = false; 
+    this.success = false;
     this.replay = false;   
   }
 }

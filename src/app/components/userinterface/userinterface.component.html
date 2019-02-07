@@ -1,45 +1,92 @@
 <div class="jumbotron text-center">
-    <h3>Light Bulb Problem</h3>
-  <!-- <hr> -->
+<h3 style="color:white">Light Bulb Challenge <i class="material-icons" style="color:yellow">
+    highlight
+    </i></h3>
+</div>
+
+<div class="jumbotron-custom">
+  <h4 class="text-center">The Challenge</h4>
+  <hr>
+  <ol class="lead">
+    <b>
+    <li>There are N number of light bulbs lined up in a row in a long room. Each bulb has its own switch and is currently switched off.</li>
+    <li>The room has an entry door and an exit door. There are N number of people lined up outside the entry door.</li>
+    <li>Each bulb is numbered consecutively from 1 to 100. Each person person is also numbered consecutively from 1 to 100.</li> 
+    <li>Person No. 1 enters the room, switches on every bulb, and exits.</li>
+    <li>Person No. 2 enters and flips the switch on every second bulb (turning off bulbs 2, 4, 6, ...).</li>
+    <li>Person No. 3 enters and flips the switch on every third bulb (changing the state on bulbs 3, 6, 9, ...).</li> 
+    <li>This continues until the total, N number of people have passed through the room.</li>
+    <br /> 
+  </b>
+  </ol>
+</div>
+<br />
+<br />
+
+<div class="jumbotron-custom2">
+  <br />
+  <h5 class="text-center">How many light bulbs remain illuminated after the last (Nth) person has passed through the room?</h5> 
+  <br />
+  <h5 class="text-center" style="color:rgb(17, 182, 25);">*Enter N number of people and N number of bulbs below!*</h5>
+  <br />
+<div class="row justify-content-md-center">  
   <div class="col">
     <div id="container">
       <div id="row">
         <form [formGroup]="messageForm" class="col-md-8" (ngSubmit)="onSubmit()">
+          <br />
+          <h4>Parameters:</h4>
+          <br />
           <div class="form-group">
           <label>
-            Please Enter Number Of People:
+            Number Of People:
           </label>
           <input type="text" formControlName="numOfPeople" class="form-control">
           <div *ngIf="calculated && messageForm.controls.numOfPeople.errors" class="error">
-              <div *ngIf="messageForm.controls.numOfPeople.errors.required">Number Of People Is Required*</div>
+              <div *ngIf="messageForm.controls.numOfPeople.errors.required">Number Of People Required*</div>
+              <div *ngIf="messageForm.controls.numOfPeople.errors.pattern">Please Enter A Number*</div>
             </div>
           </div>
 
           <div class="form-group">
           <label>
-            Please Enter Number Of Bulbs:
+            Number Of Bulbs:
           </label>
           <input type="text" formControlName="numOfBulbs" class="form-control">
           <div *ngIf="calculated && messageForm.controls.numOfBulbs.errors" class="error">
-              <div *ngIf="messageForm.controls.numOfBulbs.errors.required">Number Of Bulbs Is Required*</div>
-            </div>
+              <div *ngIf="messageForm.controls.numOfBulbs.errors.required">Number Of Bulbs Required*</div>
+              <div *ngIf="messageForm.controls.numOfBulbs.errors.pattern">Please Enter A Number*</div>
+              </div>
           </div>
 
-          <button type="submit" class="btn btn-success">Calculate</button>&nbsp;&nbsp;
-          <button *ngIf="replay" type="button" class="btn btn-danger" (click)="onCalculateAgain()">Try Again</button>
-        </form>
-        <br />
-        <br />
-        <div *ngIf="bulbNumbers && calculated">
-          <h5>Given {{ messageForm.controls.numOfPeople.value }} person(s) and {{ messageForm.controls.numOfBulbs.value }} light bulb(s)</h5>
-          <h5>You have {{ bulbNumbers.NumberOfBulbsOn }} light bulb(s) on </h5>
-          <h5>The Light Bulbs Remaining On Are: </h5>
-            <span *ngFor="let bulbNumber of bulbNumbers.BulbNumbers">
-              {{ bulbNumber }}
-            </span>
-          </div>
+          <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+          <button *ngIf="replay" type="button" class="btn btn-danger" (click)="onCalculateAgain()">Reset</button>
+          <br />
+          <br />
+          <br />
+          <br />
+        </form>         
       </div>
       </div>
+    </div>    
 
+    <div class="col col-lg-5">
+      <br />
+        <h4>Results:</h4>
+        <p class="lead"><b>Can you guess how many bulbs are still on?</b></p>
+        <br />
+        <div *ngIf="numbers && success">
+            <!-- <h5>Given {{ messageForm.controls.numOfPeople.value }} person(s) and {{ messageForm.controls.numOfBulbs.value }} light bulb(s)</h5> -->
+            <p class="lead"><b>There is/are <strong>{{ numbers.numberOfBulbsOn }}</strong> light bulb(s) illuminated.</b></p>
+            <br />
+            <p class="lead"><b>Illuminated light bulb number: </b></p>
+            <b>
+                <span *ngFor="let bulbNumber of numbers.bulbNumbers">
+                    {{bulbNumber ? + bulbNumber + '&nbsp;&nbsp;&nbsp;' : '.'}}
+                </span>
+            </b> 
+        </div>        
     </div>
+  </div>
 </div>
+<div class="jumbotron-custom3" style="color:black; height:150px;"></div>
